@@ -16,3 +16,6 @@ if __name__ == "__main__":
         for i, song in enumerate(songs[:30]):
             print(f"  标题: {song.get('title', 'N/A')}")
             print(f"  等级: {song.get('level', 'N/A')}")
+            print(f"  难度: {song.get('difficulty', 'N/A')}")
+    with open('songs_data.json', 'w', encoding='utf-8') as f:
+        json.dump(songs, f, indent=2, ensure_ascii=False)

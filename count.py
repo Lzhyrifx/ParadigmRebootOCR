@@ -1,6 +1,4 @@
 import cv2
-from PIL import Image
-import numpy as np
 
 
 def get_coordinates(event, x, y, flags, param):
@@ -46,7 +44,7 @@ def get_coordinates(event, x, y, flags, param):
 
 
 # 读取图片
-image_path = 'SCR/GRIN.jpg'
+image_path = 'SCR/wolve.jpg'
 original_image = cv2.imread(image_path)
 
 if original_image is None:
