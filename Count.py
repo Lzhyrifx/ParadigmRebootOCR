@@ -43,7 +43,7 @@ def get_coordinates(event, x, y, flags, param):
                         print(f"点{i + 1}: ({px}, {py}) - RGB:({r}, {g}, {b})")
 
 
-image_path = 'SCR/wot2.jpg'
+image_path = 'SCR/jdld6.jpg'
 original_image = cv2.imread(image_path)
 
 if original_image is None:

@@ -33,24 +33,34 @@ def level(image_path):
         b, g, r = img[y, x]
         if 210 <= r <= 225 and 135 <= g <= 150 and 235 <= b <= 255:
             print("Massive")
+        elif 225 <= r <= 238 and 108 <= g <= 120 and 105 <= b <= 120:
+            print("Invaded")
         else:
-            pass
+            print("Detected")
     if result == "type2":
-        x, y = 2687, 1780
-        b, g, r = img[y, x]
-        print(r,g,b)
-        if 245 <= r <= 255 and 245 <= g <= 255 and 245 <= b <= 255:
-            print("Massive")
-        else:
-            pass
+        detected_difficulty = None
+        for difficulty, (x, y) in difficulty_points.items():
+            b, g, r = img[y, x]
+            if (white_range[0] <= r <= white_range[1] and
+                    white_range[0] <= g <= white_range[1] and
+                    white_range[0] <= b <= white_range[1]):
+                detected_difficulty = difficulty
+                break
+
+        if detected_difficulty:
+            print(detected_difficulty)
 
 
 def region_ocr(path, region):
     re = ocr_region(path, region)
     text = re.txts[0]
-    retext = text.replace('/', '').replace('、', '').replace(',', '').replace('\\', '')
+    retext = text.replace('/', '').replace('、', '').replace(',', '')
     print(retext)
     return re
+
+difficulty_points = {"Massive": (2687, 1780),"Invaded": (2416, 1780),"Detected": (2132, 1780),}
+white_range = (235, 255)
+
 
 region_rating1 = (559, 1180, 1319, 1323)
 region_song1 = (935, 266, 2272, 346)
