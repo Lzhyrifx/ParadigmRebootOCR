@@ -44,8 +44,8 @@ for filename in os.listdir(src_folder):
             print(result_rating.txts)
             print(result_song.txts)
             song_name = os.path.splitext(filename)[0]
-            result_song.vis("RE/" + song_name + ".jpg")
-            result_rating.vis("RE/" + song_name + "XXX.jpg")
+            result_song.vis("Result/" + song_name + ".jpg")
+            result_rating.vis("Result/" + song_name + "XXX.jpg")
         elif result == "type2":
             result_rating = ocr_region(img_path, region_rating2)
             result_song = ocr_region(img_path, region_song2)
