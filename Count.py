@@ -43,8 +43,7 @@ def get_coordinates(event, x, y, flags, param):
                         print(f"点{i + 1}: ({px}, {py}) - RGB:({r}, {g}, {b})")
 
 
-# 读取图片
-image_path = 'SCR/wolve.jpg'
+image_path = 'SCR/wot2.jpg'
 original_image = cv2.imread(image_path)
 
 if original_image is None:
@@ -97,7 +96,6 @@ while True:
         params['display_img'] = display_img
         print("已重置所有点")
     elif key == ord('c'):
-        # 显示所有点的颜色信息
         if params['points']:
             print("\n当前所有点的颜色信息：")
             for i, (px, py) in enumerate(params['points']):
@@ -107,18 +105,13 @@ while True:
                     print(f"点{i + 1}: ({px}, {py}) - RGB:({r}, {g}, {b})")
                 else:
                     print(f"点{i + 1}: ({px}, {py}) - 坐标超出图像范围")
-        else:
-            print("还没有选择任何点")
 
 cv2.destroyAllWindows()
 
 # 输出最终结果
 if params['points']:
-    print("\n最终坐标和颜色结果：")
     for i, (x, y) in enumerate(params['points']):
         if 0 <= x < img_width and 0 <= y < img_height:
             pixel_color = original_image[y, x]
             b, g, r = pixel_color
             print(f"点{i + 1}: ({x}, {y}) - RGB:({r}, {g}, {b})")
-        else:
-            print(f"点{i + 1}: ({x}, {y}) - 坐标超出图像范围")
