@@ -19,7 +19,6 @@ def ocr_region(image_path, region_coords):
     res = engine(roi, use_cls=False, use_det=False, use_rec=True)
     return res
 
-
 def distinguish(image_path):
     img = cv2.imread(image_path)
     x, y = 27, 1934
