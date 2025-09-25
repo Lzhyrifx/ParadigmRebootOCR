@@ -11,7 +11,6 @@ engine = RapidOCR(
     }
 )
 
-
 def ocr_region(image_path, region_coords):
     img = cv2.imread(image_path)
     x1, y1, x2, y2 = region_coords
