@@ -9,13 +9,23 @@ def get_all_songs_levels():
     songs_data = response.json()
     return songs_data
 
+
 if __name__ == "__main__":
     songs = get_all_songs_levels()
 
-    if songs:
-        for i, song in enumerate(songs[:30]):
-            print(f"  标题: {song.get('title', 'N/A')}")
-            print(f"  等级: {song.get('level', 'N/A')}")
-            print(f"  难度: {song.get('difficulty', 'N/A')}")
+
+    simplified_songs = []
+    for song in songs:
+        simplified_song = {
+            "title": song.get("title", "N/A"),
+            "artist": song.get("artist", "N/A"),
+            "level": song.get("level", "N/A"),
+            "difficulty": song.get("difficulty", "N/A")
+        }
+        simplified_songs.append(simplified_song)
+
+
     with open('songs_data.json', 'w', encoding='utf-8') as f:
-        json.dump(songs, f, indent=2, ensure_ascii=False)
+        json.dump(simplified_songs, f, indent=2, ensure_ascii=False)
+
+    print(f"\n已保存 {len(simplified_songs)} 首歌曲信息到 songs_data.json")

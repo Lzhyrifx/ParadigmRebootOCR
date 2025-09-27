@@ -36,29 +36,33 @@ def level(image_path):
         else:
             print("Detected")
     if result == "type2":
-        detected_difficulty = None
-        for difficulty, (x, y) in difficulty_points.items():
-            b, g, r = img[y, x]
-            if (white_range[0] <= r <= white_range[1] and
-                    white_range[0] <= g <= white_range[1] and
-                    white_range[0] <= b <= white_range[1]):
-                detected_difficulty = difficulty
-                break
+        x, y = 2982, 1520
+        b, g, r = img[y, x]
+        if 170 <= r <= 190 and 120 <= g <= 135 and 200 <= b <= 215:
+            print("Massive")
+        elif 195 <= r <= 210 and 110 <= g <= 120 and 105 <= b <= 120:
+            print("Invaded")
+        else:
+            print("Detected")
 
-        if detected_difficulty:
-            print(detected_difficulty)
-
+def scr_type(region_song,region_artist,region_rating):
+    result_song = region_ocr(img_path, region_song)
+    result_artist = region_ocr(img_path, region_artist)
+    result_rating = region_ocr(img_path, region_rating)
+    level(img_path)
+    song_name = os.path.splitext(filename)[0]
+    result_song.vis("Result/" + song_name + ".jpg")
+    result_artist.vis("Result/" + song_name + "ART.jpg")
+    result_rating.vis("Result/" + song_name + "RAT.jpg")
 
 def region_ocr(path, region):
     re = ocr_region(path, region)
     text = re.txts[0]
-    retext = text.replace('/', '').replace('、', '').replace(',', '')
+    retext = text.replace('/', '').replace('、', '').replace(',', '').replace('.', '')
     print(retext)
     return re
 
 difficulty_points = {"Massive": (2687, 1780),"Invaded": (2416, 1780),"Detected": (2132, 1780),}
-white_range = (235, 255)
-
 
 region_rating1 = (559, 1180, 1319, 1323)
 region_song1 = (935, 266, 2272, 346)
@@ -75,22 +79,8 @@ for filename in os.listdir(src_folder):
         result = distinguish(img_path)
 
         if result == "type1":
-            result_song = region_ocr(img_path, region_song1)
-            result_artist = region_ocr(img_path, region_artist1)
-            result_rating = region_ocr(img_path, region_rating1)
-            level(img_path)
-            song_name = os.path.splitext(filename)[0]
-            result_song.vis("Result/" + song_name + ".jpg")
-            result_artist.vis("Result/" + song_name + "ART.jpg")
-            result_rating.vis("Result/" + song_name + "RAT.jpg")
+            scr_type(region_song1, region_artist1, region_rating1)
         elif result == "type2":
-            result_song = region_ocr(img_path, region_song2)
-            result_artist = region_ocr(img_path, region_artist2)
-            result_rating = region_ocr(img_path, region_rating2)
-            level(img_path)
-            song_name = os.path.splitext(filename)[0]
-            result_song.vis("Result/" + song_name + ".jpg")
-            result_artist.vis("Result/" + song_name + "ART.jpg")
-            result_rating.vis("Result/" + song_name + "XXX.jpg")
+            scr_type(region_song2, region_artist2, region_rating2)
         else:
             pass

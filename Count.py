@@ -43,19 +43,15 @@ def get_coordinates(event, x, y, flags, param):
                         print(f"点{i + 1}: ({px}, {py}) - RGB:({r}, {g}, {b})")
 
 
-image_path = 'SCR/jdld6.jpg'
+image_path = 'SCR/jd13.jpg'
 original_image = cv2.imread(image_path)
 
-if original_image is None:
-    print("错误：无法读取图片，请检查文件路径")
-    exit()
 
-# 获取原图尺寸
 img_height, img_width = original_image.shape[:2]
 print(f"原图尺寸: {img_width} x {img_height}")
 
 # 获取屏幕尺寸（估算）
-screen_width = 1920  # 可以根据您的屏幕调整
+screen_width = 1920
 screen_height = 1080
 
 # 计算缩放比例以适应屏幕
